@@ -1,0 +1,171 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5576,        163]
+NotebookOptionsPosition[      4317,        131]
+NotebookOutlinePosition[      4709,        147]
+CellTagsIndexPosition[      4666,        144]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Day 1 part 1", "Subsection",
+ CellChangeTimes->{{3.8473245921116867`*^9, 
+  3.847324597023168*^9}},ExpressionUUID->"920f41b2-d945-4ce9-8ac4-\
+dbd9bebc0fb5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "datafile", " ", "=", " ", 
+   "\"\</Users/mattpoepping/aoc2021/day01/input_1.txt\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Length", "[", " ", 
+  RowBox[{"Select", "[", " ", 
+   RowBox[{
+    RowBox[{"Differences", "[", 
+     RowBox[{"ReadList", "[", "datafile", "]"}], "]"}], ",", " ", 
+    RowBox[{
+     RowBox[{"#", " ", ">", " ", "0"}], " ", "&"}]}], "]"}], "]"}]}], "Input",\
+
+ CellChangeTimes->{{3.8473240893564777`*^9, 3.847324167849532*^9}, {
+   3.8473244240822*^9, 3.847324427919113*^9}, {3.847324548635252*^9, 
+   3.847324563960342*^9}, {3.847324717119507*^9, 3.847324718141972*^9}, 
+   3.84732540246984*^9},
+ CellLabel->"In[38]:=",ExpressionUUID->"2faaa407-ea60-4c13-8e9e-b1c740244a70"],
+
+Cell[BoxData["1502"], "Output",
+ CellChangeTimes->{{3.8473241638071823`*^9, 3.847324168128916*^9}, 
+   3.847324428710615*^9, {3.847324550486495*^9, 3.847324564326091*^9}, 
+   3.847324723316102*^9, 3.8473254026971416`*^9},
+ CellLabel->"Out[39]=",ExpressionUUID->"47302cf5-bf72-4f2b-82f7-51de7d7c3128"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Day 1 part 2", "Subsection",
+ CellChangeTimes->{{3.847324603497335*^9, 
+  3.84732461171992*^9}},ExpressionUUID->"db0ab8d1-c3b9-45ef-88b8-\
+68ff72584124"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "datafile", " ", "=", " ", 
+   "\"\</Users/mattpoepping/aoc2021/day01/input_1.txt\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Length", "[", " ", 
+  RowBox[{"Select", "[", " ", 
+   RowBox[{
+    RowBox[{"Differences", "[", 
+     RowBox[{
+      RowBox[{"ReadList", "[", "datafile", "]"}], ",", "1", ",", "3"}], "]"}],
+     ",", " ", 
+    RowBox[{
+     RowBox[{"#", " ", ">", " ", "0"}], " ", "&"}]}], "]"}], "]"}]}], "Input",\
+
+ CellChangeTimes->{{3.847324741103673*^9, 3.847324743356887*^9}, 
+   3.84732522320749*^9, {3.8473252756006823`*^9, 3.847325276349848*^9}, {
+   3.8473253821112757`*^9, 3.847325407769093*^9}},
+ CellLabel->"In[40]:=",ExpressionUUID->"acacc4d2-6e51-4f25-aa78-309bbe5f5e3d"],
+
+Cell[BoxData["1538"], "Output",
+ CellChangeTimes->{{3.847324734827043*^9, 3.847324743936472*^9}, 
+   3.847325244925618*^9, 3.84732527854279*^9, {3.847325378439555*^9, 
+   3.8473254080528*^9}},
+ CellLabel->"Out[41]=",ExpressionUUID->"eeb1c364-f0e0-4fda-953a-6cb318117d3f"]
+}, Open  ]],
+
+Cell["\<\
+this version uses ListConvolve to add each group of three, then comes back \
+and finds the differences between that resulting list:\
+\>", "Text",
+ CellChangeTimes->{{3.8473257056680403`*^9, 
+  3.847325734243883*^9}},ExpressionUUID->"0d83d35c-de8d-449c-bf2e-\
+829139229238"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "datafile", " ", "=", " ", 
+   "\"\</Users/mattpoepping/aoc2021/day01/input_1.txt\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Length", "[", " ", 
+  RowBox[{"Select", "[", " ", 
+   RowBox[{
+    RowBox[{"Differences", "[", " ", 
+     RowBox[{"ListConvolve", "[", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1", ",", "1"}], "}"}], ",", " ", 
+       RowBox[{"ReadList", "[", "datafile", "]"}]}], "]"}], " ", "]"}], ",", 
+    " ", 
+    RowBox[{
+     RowBox[{"#", ">", " ", "0"}], "&"}]}], "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.847325590426256*^9, 3.847325691299858*^9}},
+ CellLabel->"In[60]:=",ExpressionUUID->"2f853d9b-059f-46d5-ac0e-c7a663db3cea"],
+
+Cell[BoxData["1538"], "Output",
+ CellChangeTimes->{{3.8473256020543423`*^9, 3.847325691605486*^9}},
+ CellLabel->"Out[61]=",ExpressionUUID->"8e133e0b-bfea-42ae-9555-330c66c7c206"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{Automatic, 56}, {39, Automatic}},
+FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (May 11, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"368c077b-16b6-4184-9eda-faf0ecca60c7"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 162, 3, 54, "Subsection",ExpressionUUID->"920f41b2-d945-4ce9-8ac4-dbd9bebc0fb5"],
+Cell[CellGroupData[{
+Cell[767, 29, 744, 18, 52, "Input",ExpressionUUID->"2faaa407-ea60-4c13-8e9e-b1c740244a70"],
+Cell[1514, 49, 300, 4, 34, "Output",ExpressionUUID->"47302cf5-bf72-4f2b-82f7-51de7d7c3128"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1863, 59, 159, 3, 54, "Subsection",ExpressionUUID->"db0ab8d1-c3b9-45ef-88b8-68ff72584124"],
+Cell[CellGroupData[{
+Cell[2047, 66, 740, 19, 52, "Input",ExpressionUUID->"acacc4d2-6e51-4f25-aa78-309bbe5f5e3d"],
+Cell[2790, 87, 271, 4, 34, "Output",ExpressionUUID->"eeb1c364-f0e0-4fda-953a-6cb318117d3f"]
+}, Open  ]],
+Cell[3076, 94, 283, 6, 58, "Text",ExpressionUUID->"0d83d35c-de8d-449c-bf2e-829139229238"],
+Cell[CellGroupData[{
+Cell[3384, 104, 724, 19, 52, "Input",ExpressionUUID->"2f853d9b-059f-46d5-ac0e-c7a663db3cea"],
+Cell[4111, 125, 178, 2, 34, "Output",ExpressionUUID->"8e133e0b-bfea-42ae-9555-330c66c7c206"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
