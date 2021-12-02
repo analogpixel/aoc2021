@@ -1,3 +1,4 @@
+```
 Day 2: https://adventofcode.com/2021/day/2
 
 Part 1
@@ -18,3 +19,4 @@ True, loc
 output = Last[FoldList[ m, {0,0,0}, input]];
 output[[1]] * output[[2]]
 Out[179]= 2086357770
+```
