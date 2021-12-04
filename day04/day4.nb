@@ -1,0 +1,336 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12890,        328]
+NotebookOptionsPosition[     10923,        287]
+NotebookOutlinePosition[     11316,        303]
+CellTagsIndexPosition[     11273,        300]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Day 4", "Subtitle",
+ CellChangeTimes->{{3.847627449945182*^9, 
+  3.847627451683227*^9}},ExpressionUUID->"800ddcff-1518-4a4c-ad67-\
+df321b2efedb"],
+
+Cell[CellGroupData[{
+
+Cell["Part 1 (what board wins first)", "Subsubsection",
+ CellChangeTimes->{{3.847627457095587*^9, 3.847627457756728*^9}, {
+  3.8476328043463583`*^9, 
+  3.847632808518859*^9}},ExpressionUUID->"c1e82bbf-0ee3-42d9-bd86-\
+73a9e97fb939"],
+
+Cell["read in the data", "Text",
+ CellChangeTimes->{{3.847632817138606*^9, 
+  3.847632820039978*^9}},ExpressionUUID->"1fc9bfb1-2976-46a9-a403-\
+30d62976dbbc"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data", " ", "=", " ", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+    "\"\</Users/mattpoepping/aoc2021/day04/input_1.txt\>\"", ",", " ", 
+     "\"\<Table\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bingocalls", " ", "=", " ", 
+   RowBox[{"Map", "[", " ", 
+    RowBox[{"ToExpression", ",", " ", 
+     RowBox[{
+      RowBox[{"StringSplit", "[", 
+       RowBox[{
+        RowBox[{"First", "[", "data", "]"}], ",", " ", "\"\<,\>\""}], "]"}], 
+      "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bingocards", " ", "=", " ", 
+   RowBox[{"DeleteCases", "[", " ", 
+    RowBox[{
+     RowBox[{"SplitBy", "[", " ", 
+      RowBox[{
+       RowBox[{"Rest", "[", "data", "]"}], ",", " ", 
+       RowBox[{
+        RowBox[{"#", " ", "==", " ", 
+         RowBox[{"{", "}"}]}], " ", "&"}]}], " ", "]"}], ",", " ", 
+     RowBox[{"{", " ", 
+      RowBox[{"{", "}"}], " ", "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8476265718146963`*^9, 3.8476266415583057`*^9}, {
+   3.847626741735778*^9, 3.84762675586126*^9}, {3.847627029585122*^9, 
+   3.847627040632224*^9}, {3.8476271243608017`*^9, 3.847627213177816*^9}, {
+   3.847627442042637*^9, 3.847627475053771*^9}, {3.847630805868932*^9, 
+   3.847630823241246*^9}, {3.8476314742034883`*^9, 3.8476314794222317`*^9}, {
+   3.847632725159965*^9, 3.8476327261882668`*^9}, {3.847636128973485*^9, 
+   3.847636129679639*^9}, 3.847637263721607*^9, {3.8476375341536713`*^9, 
+   3.847637534818873*^9}, {3.847637797417335*^9, 3.847637798223641*^9}},
+ CellLabel->
+  "In[162]:=",ExpressionUUID->"3de74ccd-50a9-41e9-bf94-a53ccac0392c"],
+
+Cell["Helper Functions", "Text",
+ CellChangeTimes->{{3.8476328243682632`*^9, 
+  3.847632826081271*^9}},ExpressionUUID->"5ca3049f-6e93-4def-afcc-\
+da77bfaf8f71"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"checkCard", "[", 
+   RowBox[{"crd_", ",", "lst_"}], "]"}], " ", ":=", 
+  RowBox[{
+   RowBox[{"AnyTrue", "[", " ", 
+    RowBox[{
+     RowBox[{"Map", "[", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ContainsAll", "[", " ", 
+         RowBox[{"lst", ",", " ", "#"}], "]"}], "&"}], ",", " ", "crd"}], 
+      "]"}], " ", ",", "TrueQ"}], " ", "]"}], "||", 
+   RowBox[{"AnyTrue", "[", " ", 
+    RowBox[{
+     RowBox[{"Map", "[", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ContainsAll", "[", " ", 
+         RowBox[{"lst", ",", " ", "#"}], "]"}], "&"}], ",", " ", 
+       RowBox[{"Transpose", "[", "crd", "]"}]}], " ", "]"}], ",", " ", 
+     "TrueQ"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.847629457958716*^9, 3.847629470483726*^9}, {
+   3.847629671784243*^9, 3.847629689154622*^9}, {3.847629853642023*^9, 
+   3.847629965855761*^9}, {3.847630003853362*^9, 3.8476300511709642`*^9}, {
+   3.847630096437826*^9, 3.847630098086903*^9}, {3.847630131052484*^9, 
+   3.847630198480288*^9}, {3.847630231432671*^9, 3.847630305248808*^9}, {
+   3.847630397071158*^9, 3.847630399697661*^9}, {3.8476315632355022`*^9, 
+   3.847631593827715*^9}, {3.8476317686151533`*^9, 3.847631787743281*^9}, {
+   3.8476324941443033`*^9, 3.847632502618656*^9}, 3.847632709495681*^9},
+ CellLabel->"In[74]:=",ExpressionUUID->"5f1bd642-001f-402b-ac78-34d06297ed44"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"score", "[", 
+   RowBox[{"wincrd_", ",", " ", "i_"}], "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Total", "[", " ", 
+      RowBox[{"Total", "[", " ", "wincrd", "]"}], "]"}], " ", "-", " ", 
+     RowBox[{"Total", "[", " ", 
+      RowBox[{"Intersection", "[", " ", 
+       RowBox[{
+        RowBox[{"Flatten", "[", " ", "wincrd", "]"}], " ", ",", " ", 
+        RowBox[{"bingocalls", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ";;", "i"}], "]"}], "]"}]}], " ", "]"}], "]"}]}], 
+    ")"}], " ", "*", " ", 
+   RowBox[{"bingocalls", "[", 
+    RowBox[{"[", "i", "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8476326598084908`*^9, 3.847632669922068*^9}},
+ CellLabel->"In[67]:=",ExpressionUUID->"54fbb6ae-6e5a-40cd-bff9-48089d54bf1d"],
+
+Cell["find the winner and calculate the score.", "Text",
+ CellChangeTimes->{{3.847632828952355*^9, 
+  3.847632838432617*^9}},ExpressionUUID->"b75a991b-9784-42e2-99db-\
+b4447c0a0288"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"i", "=", "1"}], ";", " ", 
+  RowBox[{"While", "[", "  ", 
+   RowBox[{
+    RowBox[{"!", " ", 
+     RowBox[{"AnyTrue", "[", "  ", 
+      RowBox[{
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"checkCard", "[", 
+           RowBox[{"#", ",", " ", 
+            RowBox[{"bingocalls", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ";;", " ", "i"}], "]"}], "]"}]}], " ", "]"}], " ", 
+          "&"}], ",", " ", "bingocards"}], "]"}], ",", " ", "TrueQ"}], 
+      "]"}]}], ",", "  ", 
+    RowBox[{"i", "++"}]}], " ", "]"}], " ", ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"wincrd", " ", "=", " ", 
+   RowBox[{"First", "[", 
+    RowBox[{"Select", "[", " ", 
+     RowBox[{"bingocards", ",", " ", 
+      RowBox[{
+       RowBox[{"AnyTrue", "[", "  ", 
+        RowBox[{
+         RowBox[{"Map", "[", "  ", 
+          RowBox[{"checkCard", "[", 
+           RowBox[{"#", ",", " ", 
+            RowBox[{"bingocalls", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ";;", "i"}], "]"}], "]"}]}], "  ", "]"}], "]"}], 
+         ",", " ", "TrueQ"}], "]"}], "&"}]}], " ", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"score", "[", 
+  RowBox[{"wincrd", ",", " ", "i"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.8476305186459837`*^9, 3.8476306244378843`*^9}, {
+   3.847630674386629*^9, 3.8476307000191317`*^9}, {3.847631132726931*^9, 
+   3.8476311439235773`*^9}, {3.847631506031433*^9, 3.847631507332573*^9}, 
+   3.847631671242997*^9, {3.847631726997061*^9, 3.8476317541422663`*^9}, {
+   3.847631848087172*^9, 3.847631864760446*^9}, {3.847632561675836*^9, 
+   3.847632562942246*^9}, {3.847632692521254*^9, 3.847632701380481*^9}},
+ CellLabel->"In[81]:=",ExpressionUUID->"4f441f37-6555-40d3-8ffc-4be57fed1748"],
+
+Cell[BoxData["5685"], "Output",
+ CellChangeTimes->{3.8476327023785057`*^9, 3.8476327577123528`*^9},
+ CellLabel->"Out[83]=",ExpressionUUID->"7605749f-af0f-468b-a3af-52f4a89b7b55"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["part 2 ", "Subsubsection",
+ CellChangeTimes->{{3.8476339400274897`*^9, 3.847633943667398*^9}, 
+   3.847636077289015*^9},ExpressionUUID->"41c03f88-3d38-4c7e-bd50-\
+97db94f7879c"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+handjam; just figure out last iteration that has only 1 set of cards, then \
+score it.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.84763783115834*^9, 
+  3.847637852324018*^9}},ExpressionUUID->"9c359c19-1cc2-4c53-bef6-\
+f81121b0774f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"lastcrd", "=", " ", 
+  RowBox[{"Select", "[", " ", 
+   RowBox[{"bingocards", ",", " ", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"AnyTrue", "[", "  ", 
+       RowBox[{
+        RowBox[{"Map", "[", "  ", 
+         RowBox[{"checkCard", "[", 
+          RowBox[{"#", ",", " ", 
+           RowBox[{"bingocalls", "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ";;", "85"}], "]"}], "]"}]}], "   ", "]"}], "]"}], 
+        ",", " ", "TrueQ"}], "]"}]}], "&"}]}], " ", "]"}]}]], "Input",
+ CellChangeTimes->{{3.8476360871100807`*^9, 3.847636237229766*^9}, {
+   3.847636328277334*^9, 3.847636381863381*^9}, {3.847636447246348*^9, 
+   3.8476364514655437`*^9}, {3.847636575638324*^9, 3.847636576970633*^9}, {
+   3.847636677799773*^9, 3.847636683618462*^9}, {3.847636828073311*^9, 
+   3.847636845265431*^9}, {3.8476369086650743`*^9, 3.847636908744528*^9}, {
+   3.847637123539366*^9, 3.847637151161887*^9}, {3.847637192571659*^9, 
+   3.8476372315844107`*^9}, {3.847637270257298*^9, 3.847637453714714*^9}, {
+   3.8476375424617863`*^9, 3.8476375465335283`*^9}, 3.847637601500211*^9, {
+   3.847637801405499*^9, 3.847637801567129*^9}},
+ CellLabel->
+  "In[165]:=",ExpressionUUID->"a0beabc3-fdda-4f4e-b318-1af8b2b363ef"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"10", ",", "43", ",", "83", ",", "75", ",", "8"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"88", ",", "12", ",", "38", ",", "30", ",", "9"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"60", ",", "67", ",", "59", ",", "76", ",", "6"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"55", ",", "45", ",", "74", ",", "34", ",", "25"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"97", ",", "49", ",", "65", ",", "96", ",", "69"}], "}"}]}], 
+   "}"}], "}"}]], "Output",
+ CellChangeTimes->{{3.8476373457685833`*^9, 3.847637441414727*^9}, {
+   3.847637537473563*^9, 3.847637546844673*^9}, 3.8476376017917128`*^9, 
+   3.8476378018736486`*^9},
+ CellLabel->
+  "Out[165]=",ExpressionUUID->"f3cb5a71-79e1-41d3-9f10-8d9981b847d0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"score", "[", " ", 
+  RowBox[{
+   RowBox[{"First", "[", "lastcrd", "]"}], ",", " ", "86"}], "]"}]], "Input",
+ CellChangeTimes->{{3.847636733379449*^9, 3.847636775660125*^9}, {
+   3.8476374251801863`*^9, 3.847637465456274*^9}, {3.847637550384585*^9, 
+   3.847637557614369*^9}, 3.8476376836397753`*^9, {3.84763771477203*^9, 
+   3.8476377405540667`*^9}, {3.847637805565771*^9, 3.847637805819154*^9}},
+ CellLabel->
+  "In[166]:=",ExpressionUUID->"3c51eaed-05f9-499a-870d-0a266626ab48"],
+
+Cell[BoxData["21070"], "Output",
+ CellChangeTimes->{{3.8476367366966953`*^9, 3.847636740850933*^9}, {
+   3.8476367734831953`*^9, 3.847636775924878*^9}, 3.8476374664592867`*^9, {
+   3.8476375509406633`*^9, 3.847637558220636*^9}, 3.847637684106938*^9, {
+   3.8476377153216877`*^9, 3.8476377410172853`*^9}, 3.8476378065364523`*^9},
+ CellLabel->
+  "Out[166]=",ExpressionUUID->"ff8ef598-8149-493d-92c1-87ebc3d7e47c"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1373, 911},
+WindowMargins->{{Automatic, 70}, {12, Automatic}},
+FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (May 11, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"b63d5a25-1737-4a7d-89dd-c0231a46646d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 151, 3, 53, "Subtitle",ExpressionUUID->"800ddcff-1518-4a4c-ad67-df321b2efedb"],
+Cell[CellGroupData[{
+Cell[756, 29, 232, 4, 45, "Subsubsection",ExpressionUUID->"c1e82bbf-0ee3-42d9-bd86-73a9e97fb939"],
+Cell[991, 35, 158, 3, 35, "Text",ExpressionUUID->"1fc9bfb1-2976-46a9-a403-30d62976dbbc"],
+Cell[1152, 40, 1676, 38, 73, "Input",ExpressionUUID->"3de74ccd-50a9-41e9-bf94-a53ccac0392c"],
+Cell[2831, 80, 160, 3, 35, "Text",ExpressionUUID->"5ca3049f-6e93-4def-afcc-da77bfaf8f71"],
+Cell[2994, 85, 1382, 30, 30, "Input",ExpressionUUID->"5f1bd642-001f-402b-ac78-34d06297ed44"],
+Cell[4379, 117, 807, 20, 30, "Input",ExpressionUUID->"54fbb6ae-6e5a-40cd-bff9-48089d54bf1d"],
+Cell[5189, 139, 182, 3, 35, "Text",ExpressionUUID->"b75a991b-9784-42e2-99db-b4447c0a0288"],
+Cell[CellGroupData[{
+Cell[5396, 146, 1798, 43, 73, "Input",ExpressionUUID->"4f441f37-6555-40d3-8ffc-4be57fed1748"],
+Cell[7197, 191, 178, 2, 34, "Output",ExpressionUUID->"7605749f-af0f-468b-a3af-52f4a89b7b55"]
+}, Open  ]]
+}, Open  ]],
+Cell[7402, 197, 183, 3, 45, "Subsubsection",ExpressionUUID->"41c03f88-3d38-4c7e-bd50-97db94f7879c"],
+Cell[CellGroupData[{
+Cell[7610, 204, 244, 6, 37, "Subsubsection",ExpressionUUID->"9c359c19-1cc2-4c53-bef6-f81121b0774f"],
+Cell[CellGroupData[{
+Cell[7879, 214, 1236, 25, 30, "Input",ExpressionUUID->"a0beabc3-fdda-4f4e-b318-1af8b2b363ef"],
+Cell[9118, 241, 811, 19, 34, "Output",ExpressionUUID->"f3cb5a71-79e1-41d3-9f10-8d9981b847d0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9966, 265, 503, 9, 30, "Input",ExpressionUUID->"3c51eaed-05f9-499a-870d-0a266626ab48"],
+Cell[10472, 276, 411, 6, 34, "Output",ExpressionUUID->"ff8ef598-8149-493d-92c1-87ebc3d7e47c"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
