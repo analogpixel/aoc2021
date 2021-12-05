@@ -44,3 +44,13 @@ linepts[x1_, y1_, x2_, y2_] := Which[
 d = Tally[ Partition[ Flatten[ Map [ Apply[ linepts, # ] &, data]], 2]] ;
 Length [ Select[d, #[[2]] >= 2 &]]
 ```
+
+## Alternate way to load some data
+
+Using String expressions to load the data and pull it out the way I want it:
+
+```mathematica
+  data = ToExpression /@ Map[ ToString /@ StringReplace[#,    
+       x1 : NumberString ~~ ","  ~~ y1 : NumberString ~~ " -> " ~~ x2 : NumberString ~~ "," ~~ y2 : NumberString -> List[ x1, y1, x2, y2]] &, 
+    StringSplit[ Import["/Users/mattpoepping/aoc2021/day05/sample_input_1.txt", "String"], "\n"] ];
+```
