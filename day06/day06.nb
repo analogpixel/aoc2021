@@ -1,0 +1,208 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6979,        200]
+NotebookOptionsPosition[      5614,        167]
+NotebookOutlinePosition[      6008,        183]
+CellTagsIndexPosition[      5965,        180]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Day 6", "Subsection",
+ CellChangeTimes->{{3.8477959298032417`*^9, 
+  3.847795931033338*^9}},ExpressionUUID->"1098ce23-6cdc-45be-8ce4-\
+c73adc6f553d"],
+
+Cell[CellGroupData[{
+
+Cell["part 1", "Subsubsection",
+ CellChangeTimes->{{3.847795935403553*^9, 
+  3.8477959360255527`*^9}},ExpressionUUID->"75c1f636-9517-4cc2-85c7-\
+980b934d9954"],
+
+Cell["dumb way of doing things, but it works.", "Text",
+ CellChangeTimes->{{3.8478115101698303`*^9, 
+  3.847811516900125*^9}},ExpressionUUID->"f52c05bc-583c-4c5d-b33d-\
+e0f053258934"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data", " ", "=", " ", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{
+    "\"\</Users/mattpoepping/aoc2021/day06/sample_input_1.txt\>\"", ",", " ", 
+     "Number", ",", " ", 
+     RowBox[{"RecordSeparators", "\[Rule]", "\"\<,\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Length", "[", " ", 
+  RowBox[{"Nest", " ", "[", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Flatten", "[", "  ", 
+      RowBox[{
+       RowBox[{"Map", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "-", "1"}], "&"}], ",", " ", "#"}], "]"}], " ", "/.", 
+       " ", 
+       RowBox[{
+        RowBox[{"-", "1"}], " ", "->", " ", 
+        RowBox[{"{", 
+         RowBox[{"6", ",", "8"}], "}"}]}]}], "]"}], "&"}], " ", ",", "data", 
+    ",", "80"}], "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.847794396377391*^9, 3.847794476985771*^9}, {
+  3.8477945283069487`*^9, 3.847794543602932*^9}, {3.8477946015882893`*^9, 
+  3.847794619302952*^9}, {3.847794664663518*^9, 3.847794703931663*^9}, {
+  3.847795905821917*^9, 3.8477959180407867`*^9}, {3.847796708686841*^9, 
+  3.847796709267378*^9}},
+ CellLabel->
+  "In[642]:=",ExpressionUUID->"bcca52fa-df0e-4c3f-9286-b29de47ebb31"],
+
+Cell[BoxData["5934"], "Output",
+ CellChangeTimes->{{3.847795911483759*^9, 3.84779591910012*^9}, 
+   3.8477967095031357`*^9, 3.847799010887116*^9},
+ CellLabel->
+  "Out[643]=",ExpressionUUID->"6a8bf82c-38fb-4c74-a731-3c13174c686d"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["part 2", "Subsubsection",
+ CellChangeTimes->{{3.847795938393552*^9, 
+  3.847795942011622*^9}},ExpressionUUID->"63d5dbd2-02bd-4861-9d55-\
+a5b18b31a676"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data", " ", "=", " ", 
+   RowBox[{"Tally", "[", 
+    RowBox[{"ReadList", "[", 
+     RowBox[{
+     "\"\</Users/mattpoepping/aoc2021/day06/input_1.txt\>\"", ",", " ", 
+      "Number", ",", " ", 
+      RowBox[{"RecordSeparators", "\[Rule]", "\"\<,\>\""}]}], "]"}], "]"}]}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.847809914489131*^9, 3.847809962553701*^9}, {
+   3.8478100814718227`*^9, 3.8478101247832747`*^9}, {3.847810168849403*^9, 
+   3.8478102094774113`*^9}, {3.8478102847400923`*^9, 3.847810348706785*^9}, {
+   3.8478105001003847`*^9, 3.8478105347632837`*^9}, {3.847810662882041*^9, 
+   3.8478107262900457`*^9}, 3.84781079792448*^9, {3.847810860815542*^9, 
+   3.8478108877858973`*^9}, {3.847811045632613*^9, 3.847811108006627*^9}, {
+   3.847811154943585*^9, 3.847811155221325*^9}, {3.8478111886726093`*^9, 
+   3.847811274286858*^9}, {3.847811306279272*^9, 3.847811308175846*^9}},
+ CellLabel->"In[88]:=",ExpressionUUID->"2ab0c3c4-41fc-46ae-8d9e-08da8bb3a5e2"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"3", ",", "58"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "67"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "70"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "48"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "57"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.8478113085070257`*^9},
+ CellLabel->"Out[88]=",ExpressionUUID->"d670423c-9f42-4fae-9850-6078465030dd"]
+}, Open  ]],
+
+Cell["\<\
+smart way of doing things;  uses buckets, and just moves buckets around.  \
+much faster and can actually get an answer unlike the above way of doing \
+things.\
+\>", "Text",
+ CellChangeTimes->{{3.847811522126958*^9, 
+  3.847811544055875*^9}},ExpressionUUID->"37797771-d57e-4997-8b6f-\
+9f394c88a394"],
+
+Cell[BoxData[
+ RowBox[{"Total", "[", " ", 
+  RowBox[{"Nest", " ", "[", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Join", " ", "[", " ", 
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", 
+         RowBox[{"2", ";;", "7"}], "]"}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "8", "]"}], "]"}], " ", "+", " ", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "9", "]"}], "]"}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "}"}]}], " ", "]"}], "&"}], " ", ",", 
+    RowBox[{"{", 
+     RowBox[{
+     "0", ",", "0", ",", "57", ",", "70", ",", "58", ",", "48", ",", "67", 
+      ",", "0", ",", "0", ",", "0"}], "}"}], ",", "  ", "257"}], "]"}], 
+  "]"}]], "Input",ExpressionUUID->"17534a80-a55a-4d5e-83ea-53baa73f5f24"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1019, 911},
+WindowMargins->{{Automatic, 127}, {12, Automatic}},
+FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (May 11, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"7ee99934-46f5-43e2-be49-eba19283aa5d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 155, 3, 54, "Subsection",ExpressionUUID->"1098ce23-6cdc-45be-8ce4-c73adc6f553d"],
+Cell[CellGroupData[{
+Cell[760, 29, 159, 3, 45, "Subsubsection",ExpressionUUID->"75c1f636-9517-4cc2-85c7-980b934d9954"],
+Cell[922, 34, 183, 3, 35, "Text",ExpressionUUID->"f52c05bc-583c-4c5d-b33d-e0f053258934"],
+Cell[CellGroupData[{
+Cell[1130, 41, 1208, 31, 52, "Input",ExpressionUUID->"bcca52fa-df0e-4c3f-9286-b29de47ebb31"],
+Cell[2341, 74, 229, 4, 34, "Output",ExpressionUUID->"6a8bf82c-38fb-4c74-a731-3c13174c686d"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2619, 84, 157, 3, 45, "Subsubsection",ExpressionUUID->"63d5dbd2-02bd-4861-9d55-a5b18b31a676"],
+Cell[CellGroupData[{
+Cell[2801, 91, 1015, 18, 52, "Input",ExpressionUUID->"2ab0c3c4-41fc-46ae-8d9e-08da8bb3a5e2"],
+Cell[3819, 111, 476, 14, 34, "Output",ExpressionUUID->"d670423c-9f42-4fae-9850-6078465030dd"]
+}, Open  ]],
+Cell[4310, 128, 308, 7, 58, "Text",ExpressionUUID->"37797771-d57e-4997-8b6f-9f394c88a394"],
+Cell[4621, 137, 965, 26, 30, "Input",ExpressionUUID->"17534a80-a55a-4d5e-83ea-53baa73f5f24"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
