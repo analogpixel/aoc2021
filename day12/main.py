@@ -1,10 +1,8 @@
-[day12](https://adventofcode.com/2021/day/12)
+#!/usr/bin/env python
 
-I cheated and used python for this one, the mathematica graph 
-functions don't revist nodes, and ` ¯\_(ツ)_/¯ `
+data = {}
+verts = []
 
-## Load the data
-```python
 for r in open("input_1.txt","r"):
     (a,b) = r.strip().split("-")
     
@@ -22,10 +20,8 @@ for r in open("input_1.txt","r"):
         verts.append(a)
     if b not in verts:
         verts.append(b)
-```
 
-## Part 1
-```python
+
 def findpaths(currentpath, v):
     # loop through all connected nodes
     for j in data[v]:
@@ -36,10 +32,6 @@ def findpaths(currentpath, v):
         else:
             findpaths(currentpath + [v], j) 
 
-```
-
-## Part 2
-```python
 def findpaths2(currentpath, d, v):
     # loop through all connected nodes
     for j in data[v]:
@@ -52,6 +44,12 @@ def findpaths2(currentpath, d, v):
         else:
             findpaths2(currentpath + [v], d,j) 
 
-```
+# part 1
+# ./main.py  | sort -u | wc -l
+# findpaths([], "start")
 
-So lazy, just run the programs with `| sort -u | wc -l `    
+# part 2
+# ./main.py  | sort -u | wc -l
+for a in verts:
+    if a.islower():
+        findpaths2([], a, "start")
